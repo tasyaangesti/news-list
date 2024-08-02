@@ -3,14 +3,15 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
+const cors = require("cors");
 const UserController = require("./controller/userController");
 const Controller = require("./controller/controller");
 const app = express();
 const port = 3000;
-
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const router = express.Router();
+// const router = express.Router();
 
 app.post("/register", UserController.registerUser);
 app.post("/login", UserController.login);
