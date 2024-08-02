@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 export function Profile() {
   const { id } = useParams();
+  console.log(id, ">> id profile");
   const [profile, setProfile] = useState();
 
   const fetchDetailUser = async () => {

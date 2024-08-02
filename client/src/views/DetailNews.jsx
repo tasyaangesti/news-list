@@ -40,7 +40,9 @@ export function DetailNews() {
                 alt={detailNews?.title}
               />
             </figure>
-            <p className="text-lg text-gray-800">{detailNews?.content}</p>
+            <p className="text-lg text-gray-800 text-justify">
+              {detailNews?.content}
+            </p>
           </div>
         </div>
       </div>
