@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const UserController = require("./controller/userController");
+const Controller = require("./controller/controller");
 const app = express();
 const port = 3000;
 
@@ -13,6 +14,7 @@ const router = express.Router();
 
 app.post("/register", UserController.registerUser);
 app.post("/login", UserController.login);
+app.get("/", Controller.getAllData);
 
 app.listen(port, () => {
   console.log(`running on port ${port}`);
