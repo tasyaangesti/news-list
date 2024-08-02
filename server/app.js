@@ -16,6 +16,7 @@ app.post("/register", UserController.registerUser);
 app.post("/login", UserController.login);
 app.get("/", Controller.getAllData);
 app.get("/article/:id", Controller.getDataById);
+app.get("/profile/:id", Controller.getDetailUser);
 
 app.listen(port, () => {
   console.log(`running on port ${port}`);

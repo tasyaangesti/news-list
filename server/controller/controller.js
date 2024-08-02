@@ -1,4 +1,4 @@
-const { Article } = require("../models");
+const { Article, User } = require("../models");
 
 class Controller {
   static async getAllData(req, res) {
@@ -35,7 +35,24 @@ class Controller {
     }
   }
 
+  static async getDetailUser(req, res) {
+    try {
+      const { id } = req.params;
+      const findUser = await User.findByPk(id);
+      if (!findUser) {
+        throw { code: 404, message: "data not found" };
+      }
 
+      res.status(200).json(findUser);
+    } catch (error) {
+      console.log(error);
+      if (error.hasOwnProperty("code")) {
+        res.status(error.code).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "Internal Server Error" });
+      }
+    }
+  }
 }
 
 module.exports = Controller;
