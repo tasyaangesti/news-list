@@ -15,6 +15,7 @@ const router = express.Router();
 app.post("/register", UserController.registerUser);
 app.post("/login", UserController.login);
 app.get("/", Controller.getAllData);
+app.get("/article/:id", Controller.getDataById);
 
 app.listen(port, () => {
   console.log(`running on port ${port}`);
