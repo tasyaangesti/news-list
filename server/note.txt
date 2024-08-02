@@ -1,0 +1,5 @@
+user
+
+npx sequelize-cli model:generate --name User  --attributes firstName:string,lastName:string,email:string,phoneNumber:integer,password:string
+
+npx sequelize-cli model:generate --name Article --attributes title:string,content:string,imgUrl:string,category:string
