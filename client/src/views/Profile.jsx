@@ -9,7 +9,7 @@ export function Profile() {
   const fetchDetailUser = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/profile/${id}`);
-      console.log(response.data, ">> response detail news");
+      console.log(response.data, ">> response detail profile");
       setProfile(response.data);
     } catch (error) {
       console.log(error, ">> error profile");
