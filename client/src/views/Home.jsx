@@ -21,7 +21,6 @@ export function Home() {
   }, []);
 
   const handleCardClick = (id) => {
-    // cek ada access token apa ga, kalau ada navigate
     navigate(`/news/${id}`);
   };
 

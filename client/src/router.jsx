@@ -30,13 +30,13 @@ export const router = createBrowserRouter([
         element: <DetailNews />,
         loader: () => {
           const isLogin = localStorage.getItem("access_token");
-          console.log(isLogin, ">ddd");
+          //   console.log(isLogin, ">ddd");
 
           if (!isLogin) {
-            console.log(">aaa");
+            // console.log(">aaa");
             return redirect("/login");
           }
-          console.log(">bbb");
+          //   console.log(">bbb");
 
           return null;
         },
