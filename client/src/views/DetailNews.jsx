@@ -30,17 +30,17 @@ export function DetailNews() {
           <div className="space-y-5 md:space-y-8">
             <div className="space-y-3">
               <h2 className="text-2xl font-bold md:text-3xl text-center text-gray-800">
-                {detailNews.title}
+                {detailNews?.title}
               </h2>
             </div>
             <figure>
               <img
                 className="w-full object-cover rounded-xl"
-                src={detailNews.imgUrl}
-                alt={detailNews.title}
+                src={detailNews?.imgUrl}
+                alt={detailNews?.title}
               />
             </figure>
-            <p className="text-lg text-gray-800">{detailNews.content}</p>
+            <p className="text-lg text-gray-800">{detailNews?.content}</p>
           </div>
         </div>
       </div>
