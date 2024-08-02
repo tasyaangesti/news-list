@@ -14,7 +14,8 @@ export function Login() {
   const onSubmit = async (data) => {
     try {
       const response = await axios.post("http://localhost:3000/login", data);
-      console.log(response.data, ">> login");
+      console.log(response.data.access_token, ">> login");
+      localStorage.setItem("access_token", response.data.access_token);
       navigate("/");
     } catch (error) {
       console.log(error);
