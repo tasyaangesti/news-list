@@ -4,6 +4,7 @@ import { Home } from "./views/Home";
 import { Layout } from "./views/Layout";
 import { Register } from "./views/Register";
 import { DetailNews } from "./views/DetailNews";
+import { Profile } from "./views/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -30,14 +31,20 @@ export const router = createBrowserRouter([
         element: <DetailNews />,
         loader: () => {
           const isLogin = localStorage.getItem("access_token");
-          //   console.log(isLogin, ">ddd");
-
           if (!isLogin) {
-            // console.log(">aaa");
             return redirect("/login");
           }
-          //   console.log(">bbb");
-
+          return null;
+        },
+      },
+      {
+        path: "/profile/:id",
+        element: <Profile />,
+        loader: () => {
+          const isLogin = localStorage.getItem("access_token");
+          if (!isLogin) {
+            return redirect("/login");
+          }
           return null;
         },
       },
