@@ -1,6 +1,26 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Login() {
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:3000/login", data);
+      console.log(response.data, ">> login");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div
@@ -10,13 +30,14 @@ export function Login() {
             "url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
       >
-        <form method="POST" action="#">
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="bg-white px-10 py-8 rounded-xl w-screen shadow-xl max-w-sm">
             <div className="space-y-4">
               <h1 className="text-center text-2xl font-semibold text-gray-600">
                 Login
               </h1>
               <hr />
+              {/* email */}
               <div className="flex items-center border-2 py-2 px-3 rounded-md mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -35,12 +56,15 @@ export function Login() {
                 <input
                   className="pl-2 outline-none border-none w-full"
                   type="email"
+                  id="email"
                   name="email"
-                  defaultValue=""
                   placeholder="Email"
-                  required=""
+                  {...register("email", {
+                    required: "Email is required",
+                  })}
                 />
               </div>
+              {/* password */}
               <div className="flex items-center border-2 py-2 px-3 rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -58,9 +82,11 @@ export function Login() {
                   className="pl-2 outline-none border-none w-full"
                   type="password"
                   name="password"
-                  id=""
+                  id="password"
                   placeholder="Password"
-                  required=""
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
                 />
               </div>
             </div>
