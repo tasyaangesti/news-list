@@ -7,7 +7,7 @@ const cors = require("cors");
 const UserController = require("./controller/userController");
 const Controller = require("./controller/controller");
 const app = express();
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || 3000;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
