@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useState } from "react";
 
 export function Register() {
   const navigate = useNavigate();
+  const [registerError, setRegisterError] = useState(null);
 
   const {
     register,
@@ -17,6 +19,11 @@ export function Register() {
       console.log(response.data, ">> register");
       navigate("/login");
     } catch (error) {
+      if (error.response && error.response.status === 409) {
+        setRegisterError("Email is already registered.");
+      } else {
+        setRegisterError("An error occurred. Please try again.");
+      }
       console.log(error);
     }
   };
@@ -38,76 +45,114 @@ export function Register() {
               </h1>
               <hr />
               {/* firstname */}
-              <div className="flex items-center border-2 py-2 px-3 rounded-md mb-4">
-                <input
-                  className="pl-2 outline-none border-none w-full"
-                  type="firstName"
-                  name="firstName"
-                  id="firstName"
-                  placeholder="First Name"
-                  {...register("firstName", {
-                    required: "First name is required",
-                  })}
-                />
+              <div className="flex flex-col mb-4">
+                <div className="flex items-center border-2 py-2 px-3 rounded-md">
+                  <input
+                    className="pl-2 outline-none border-none w-full"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="First Name"
+                    {...register("firstName", {
+                      required: "First name is required",
+                    })}
+                  />
+                </div>
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm ml-1">
+                    {errors.firstName.message}
+                  </p>
+                )}
               </div>
               {/* lastname */}
-              <div className="flex items-center border-2 py-2 px-3 rounded-md mb-4">
-                <input
-                  className="pl-2 outline-none border-none w-full"
-                  type="lastName"
-                  name="lastName"
-                  id="lastName"
-                  defaultValue=""
-                  placeholder="Last Name"
-                  {...register("lastName", {
-                    required: "Last Name is required",
-                  })}
-                />
+              <div className="flex flex-col mb-4">
+                <div className="flex items-center border-2 py-2 px-3 rounded-md">
+                  <input
+                    className="pl-2 outline-none border-none w-full"
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Last Name"
+                    {...register("lastName", {
+                      required: "Last Name is required",
+                    })}
+                  />
+                </div>
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm ml-1">
+                    {errors.lastName.message}
+                  </p>
+                )}
               </div>
               {/* phone number */}
-              <div className="flex items-center border-2 py-2 px-3 rounded-md">
-                <input
-                  className="pl-2 outline-none border-none w-full"
-                  type="tel"
-                  name="phoneNumber"
-                  id="phoneNumber"
-                  placeholder="Phone Number"
-                  {...register("phoneNumber", {
-                    required: "Phone Number is required",
-                  })}
-                />
+              <div className="flex flex-col mb-4">
+                <div className="flex items-center border-2 py-2 px-3 rounded-md">
+                  <input
+                    className="pl-2 outline-none border-none w-full"
+                    type="tel"
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    placeholder="Phone Number"
+                    {...register("phoneNumber", {
+                      required: "Phone Number is required",
+                    })}
+                  />
+                </div>
+                {errors.phoneNumber && (
+                  <p className="text-red-500 text-sm ml-1">
+                    {errors.phoneNumber.message}
+                  </p>
+                )}
               </div>
               {/* email */}
-              <div className="flex items-center border-2 py-2 px-3 rounded-md mb-4">
-                <input
-                  className="pl-2 outline-none border-none w-full"
-                  type="email"
-                  name="email"
-                  id="email"
-                  {...register("email", {
-                    required: "Email is required",
-                  })}
-                  placeholder="Email"
-                />
+              <div className="flex flex-col mb-4">
+                <div className="flex items-center border-2 py-2 px-3 rounded-md">
+                  <input
+                    className="pl-2 outline-none border-none w-full"
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                    {...register("email", {
+                      required: "Email is required",
+                    })}
+                  />
+                </div>
+                {errors.email && (
+                  <p className="text-red-500 text-sm ml-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               {/* password */}
-              <div className="flex items-center border-2 py-2 px-3 rounded-md">
-                <input
-                  className="pl-2 outline-none border-none w-full"
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  {...register("password", {
-                    required: "Password is required",
-                  })}
-                />
+              <div className="flex flex-col mb-4">
+                <div className="flex items-center border-2 py-2 px-3 rounded-md">
+                  <input
+                    className="pl-2 outline-none border-none w-full"
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
+                  />
+                </div>
+                {errors.password && (
+                  <p className="text-red-500 text-sm ml-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
             </div>
+            {registerError && (
+              <div className="text-red-500 text-center ml-4">
+                {registerError}
+              </div>
+            )}
             <button
               type="submit"
-              value="login"
-              id="login"
+              id="register"
               className="mt-6 w-full shadow-xl bg-black text-indigo-100 py-2 rounded-md text-lg tracking-wide transition duration-1000"
             >
               Register

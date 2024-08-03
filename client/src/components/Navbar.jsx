@@ -34,6 +34,7 @@ export function Navbar() {
                 <img
                   className="h-7 w-auto"
                   src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+                  
                   alt="Logo"
                 />
               </Link>
