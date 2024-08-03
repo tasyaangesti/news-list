@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export function Navbar() {
-  const { id } = useParams();
+  // const { id } = useParams();
+  const [id, setId] = useState(null);
   console.log(id, ">> profile id di navbar");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
@@ -10,10 +11,17 @@ export function Navbar() {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     setIsLoggedIn(!!token);
+    console.log(id, ">> iddddddd");
+
+    const userId = localStorage.getItem("id");
+    console.log(userId, ">> user id navbar");
+    setId(userId);
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("id");
+
     setIsLoggedIn(false);
     navigate("/");
   };

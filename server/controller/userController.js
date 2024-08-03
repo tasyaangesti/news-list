@@ -56,8 +56,8 @@ class UserController {
         throw { code: 401, message: "invalid password" };
       }
 
-      const access_token = signToken({ id: User.id });
-      res.status(200).json({ email, access_token: access_token });
+      const access_token = signToken({ id: findUser.id });
+      res.status(200).json({ email, access_token: access_token, id: findUser.id });
     } catch (error) {
       console.log(error, ">> error");
       if (error.hasOwnProperty("code")) {

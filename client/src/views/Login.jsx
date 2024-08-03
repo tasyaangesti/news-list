@@ -16,6 +16,8 @@ export function Login() {
       const response = await axios.post("http://localhost:3000/login", data);
       console.log(response.data.access_token, ">> login");
       localStorage.setItem("access_token", response.data.access_token);
+      localStorage.setItem("id", response.data.id);
+
       navigate("/");
     } catch (error) {
       console.log(error);
