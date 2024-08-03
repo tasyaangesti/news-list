@@ -20,6 +20,13 @@ export function DetailNews() {
     fetchDetailNews();
   }, [id]);
 
+  const formatDate = (dateString) =>
+    new Date(dateString).toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 p-4">
       <div className="container-detail-page max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
@@ -27,11 +34,15 @@ export function DetailNews() {
           <div className="flex justify-between items-center mb-6">
             <div className="flex w-full sm:items-center gap-x-5 sm:gap-x-3"></div>
           </div>
-          <div className="space-y-5 md:space-y-8">
+          <div className="space-y-5 md:space-y-8 mt-[80px]">
             <div className="space-y-3">
               <h2 className="text-2xl font-bold md:text-3xl text-center text-gray-800">
                 {detailNews?.title}
               </h2>
+              <p className="text-gray-600 text-center">
+                {formatDate(detailNews?.createdAt)} |{" "}
+                <span className="font-semibold"> {detailNews?.category} </span>
+              </p>
             </div>
             <figure>
               <img
