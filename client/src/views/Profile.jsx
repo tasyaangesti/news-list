@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export function Profile() {
   const { id } = useParams();
-  console.log(id, ">> id profile");
+  // console.log(id, ">> id profile");
   const [profile, setProfile] = useState();
 
   const fetchDetailUser = async () => {
@@ -20,6 +20,13 @@ export function Profile() {
   useEffect(() => {
     fetchDetailUser();
   }, [id]);
+
+  const formatDate = (dateString) =>
+    new Date(dateString).toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 p-4">
@@ -40,6 +47,9 @@ export function Profile() {
           </p>
           <p className="text-gray-600 text-center mt-2">
             Phone: {profile?.phoneNumber}
+          </p>
+          <p className="text-gray-600 text-center mt-2">
+            Member Since: {formatDate(profile?.createdAt)}
           </p>
         </div>
       </div>

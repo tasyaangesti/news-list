@@ -4,17 +4,15 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 export function Navbar() {
   // const { id } = useParams();
   const [id, setId] = useState(null);
-  console.log(id, ">> profile id di navbar");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     setIsLoggedIn(!!token);
-    console.log(id, ">> iddddddd");
 
     const userId = localStorage.getItem("id");
-    console.log(userId, ">> user id navbar");
+    // console.log(userId, ">> user id navbar");
     setId(userId);
   }, []);
 
