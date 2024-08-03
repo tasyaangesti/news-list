@@ -3,9 +3,19 @@ const { Article, User } = require("../models");
 class Controller {
   static async getAllData(req, res) {
     try {
-      const news = await Article.findAll();
+      const { page = 1, limit = 10 } = req.query;
+      const offset = (page - 1) * limit;
+      const news = await Article.findAndCountAll({
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+      });
 
-      res.status(200).json(news);
+      res.status(200).json({
+        items: news.rows,
+        totalItems: news.count,
+        currentPage: parseInt(page),
+        totalPages: Math.ceil(news.count / limit),
+      });
     } catch (error) {
       console.log(error);
       if (error.hasOwnProperty("code")) {
